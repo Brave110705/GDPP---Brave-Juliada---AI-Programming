@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class item : MonoBehaviour, IInteractable, IPickable
 {
@@ -7,13 +8,24 @@ public class item : MonoBehaviour, IInteractable, IPickable
 
     public string Name => _itemData.Name;
 
-    public void Interact()
+    public UnityEvent OnItemPicked;
+
+    [ContextMenu("Interact Item")]
+    public void Interact(PlayerCharacter character)
     {
-        Pickup();
+        Pickup(character);
     }
 
-    public void Pickup()
+    public void Pickup(PlayerCharacter character)
     {
-        throw new System.NotImplementedException();
+        // Membuat variable salinan data dari variable _data
+        ItemData newData = new ItemData(_itemData.ID, _itemData.Name);
+        // Menambahkan salinan data ke list di inventory
+        // menggunakan reference PlayerCharacter
+        character.Inventory.AddItems(newData);
+        // Memanggil event ketika item diambil
+        OnItemPicked?.Invoke();
+        // Menghapus item ketika item diambil
+        Destroy(gameObject);
     }
 }

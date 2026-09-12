@@ -21,6 +21,13 @@ public class PlayerCharacterMovement : MonoBehaviour
     private float _sprintSpeed = 2; 
     [SerializeField] 
     private float _acceleration = 0.5f; 
+    public bool Enabled { get; private set; } = true;
+ 
+    // Mengubah status aktif movement
+    public void SetEnabled(bool isEnabled)
+    {
+        Enabled = isEnabled;
+    }
     public void SetMoveDirection(Vector2 inputDirection) 
     { 
         // Mengisikan arah input sumbu x ke arah gerakan character sumbu x 
@@ -73,14 +80,22 @@ public class PlayerCharacterMovement : MonoBehaviour
     } 
     public void Move() 
     { 
-        // Menghitung arah dan kecepatan gerakan character di sumbu x dan z 
-        CalculateVelocityXZ(); 
-        // Menghitung arah dan kecepatan gerakan character di sumbu y 
-        CalculateVelocityY(); 
-        // Menggabung arah dan kecepatan gerakan character di sumbu x, y, dan z 
-        Vector3 velocity = new Vector3(_velocityXZ.x, _velocityY, _velocityXZ.z); 
-        // Menggerakkan character sesuai arah dan kecepatan yang sudah dihitung 
-        _characterController.Move(velocity); 
+        if (Enabled == true)
+        {
+            // Jika movement aktif
+            // Menghitung arah dan kecepatan gerakan character di sumbu x dan z
+            CalculateVelocityXZ();
+            // Menghitung arah dan kecepatan gerakan character di sumbu y
+            CalculateVelocityY();
+ 
+            // Menggabung arah dan kecepatan gerakan character di sumbu x, y, dan z
+            Vector3 velocity = new Vector3(_velocityXZ.x,
+                                           _velocityY, 
+                                           _velocityXZ.z);
+ 
+            // Menggerakkan character sesuai arah dan kecepatan yang sudah dihitung
+            _characterController.Move(velocity);
+        }
     } 
 
     private void CheckIsGrounded() 

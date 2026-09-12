@@ -21,10 +21,18 @@ public class InputManager : MonoBehaviour, IPlayerActions
         // action map Player 
         _inputAction.Player.SetCallbacks(this); 
     }
+    public UnityEvent OnInteractInput;
+ 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("Interact"); 
-    } 
+        // contect.performed digunakan untuk mengecek apakah input ditekan
+        if (context.performed)
+        {
+            // Jika input ditekan maka trigger event OnInteractInput
+            //Debug.Log(context.ReadValue<float>());
+            OnInteractInput?.Invoke();
+        }
+    }
     public void OnMove(InputAction.CallbackContext context)
     {
         //Debug.Log(context.ReadValue<Vector2>());
@@ -42,4 +50,5 @@ public class InputManager : MonoBehaviour, IPlayerActions
             OnSprintInput?.Invoke(false); 
         }         
     }
+    
 } 
