@@ -32,6 +32,11 @@ public class PlayerCharacter : MonoBehaviour
     // Property untuk mengakses variable _input
     public InputManager Input => _input;
     // Function untuk mengubah status hiding player
+    // Variable untuk reference ke module Flashlight
+    [SerializeField]
+    private Flashlight _flashlight;
+    // Property untuk mengakses variable _flashlight
+    public Flashlight Flashlight => _flashlight;
     public void SetIsHiding(bool isHiding)
     {
         IsHiding = isHiding;

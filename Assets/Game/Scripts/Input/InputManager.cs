@@ -50,5 +50,16 @@ public class InputManager : MonoBehaviour, IPlayerActions
             OnSprintInput?.Invoke(false); 
         }         
     }
+
+    public UnityEvent OnFlashlightInput;
     
+    public void OnFlashlight(InputAction.CallbackContext context)
+    {
+        // contect.performed digunakan untuk mengecek apakah input ditekan
+        if (context.performed)
+        {
+            // Jika input ditekan maka trigger event OnFlashlightInput
+            OnFlashlightInput?.Invoke();
+        }
+    }
 } 

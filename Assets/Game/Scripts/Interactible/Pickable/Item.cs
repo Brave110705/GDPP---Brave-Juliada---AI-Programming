@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class item : MonoBehaviour, IInteractable, IPickable
+public class Item : MonoBehaviour, IInteractable, IPickable
 {
     [SerializeField]
     private ItemData _itemData;
@@ -16,7 +16,7 @@ public class item : MonoBehaviour, IInteractable, IPickable
         Pickup(character);
     }
 
-    public void Pickup(PlayerCharacter character)
+    public virtual void Pickup(PlayerCharacter character)
     {
         // Membuat variable salinan data dari variable _data
         ItemData newData = new ItemData(_itemData.ID, _itemData.Name);

@@ -117,7 +117,7 @@ public class HidingCloset : MonoBehaviour, IInteractable
 
     public IEnumerator Unhide()
     {
-        _hidingPlayer.Input.OnInteractInput.AddListener(StopHiding);
+        //_hidingPlayer.Input.OnInteractInput.AddListener(StopHiding);
         // Membuka pintu lemari
         _door.Open();
         // Menunggu selama masih menjalankan animasi buka pintu
@@ -174,6 +174,7 @@ public class HidingCloset : MonoBehaviour, IInteractable
         // Membuat status player menjadi tidak hiding
         _hidingPlayer.SetIsHiding(false);
         // Mengosongkan kembali reference ke player yang hiding
+        _hidingPlayer.Input.OnInteractInput.RemoveListener(StopHiding);
         _hidingPlayer = null;
  
         // Menunggu selama masih menjalankan animasi tutup pintu
