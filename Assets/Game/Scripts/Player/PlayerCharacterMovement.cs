@@ -123,9 +123,16 @@ public class PlayerCharacterMovement : MonoBehaviour
             _velocityY = -2; 
         } 
     } 
-    public void SetSprint(bool isSprint) 
-    { 
-        _isSprint = isSprint; 
+    public void SetSprint(bool isSprint)
+    {
+        _isSprint = isSprint;
+        // Jika player sedang berlari
+        if (isSprint == true)
+        {
+            // Maka munculkan StaminaUI
+            HUDManager.Instance.StaminaUI.SetVisible(true);
+            //Debug.Log(HUDManager.Instance.StaminaUI);
+        }
     }
     private void CalculateAcceleration() 
     { 
@@ -170,5 +177,6 @@ public class PlayerCharacterMovement : MonoBehaviour
         // Memanggil Move di dalam Update untuk menggerakan character terus menerus 
         // sesuai dengan arah dan kecepatan gerakan character. 
         Move(); 
-    }  
+    }
+  
 } 

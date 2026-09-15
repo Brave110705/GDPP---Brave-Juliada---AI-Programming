@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
- 
+using UnityEngine.Events;
+
 public class PlayerCharacter : MonoBehaviour
 {
     // Variable untuk reference ke module PlayerCharacterMovement
@@ -48,5 +50,12 @@ public class PlayerCharacter : MonoBehaviour
         Cursor.visible = false;
         // cursor mouse akan dikunci di tengah layar
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public UnityEvent OnDeath;
+    public void Death()
+    {
+        Debug.Log("Lose");
+        OnDeath?.Invoke();
     }
 }

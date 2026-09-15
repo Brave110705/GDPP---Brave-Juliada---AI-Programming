@@ -82,7 +82,17 @@ public class InteractDetector : MonoBehaviour
                     // Jika implementasi interface interactable
                     // Maka masukkan object ke dalam variable _detectedInteractable
                     _detectedInteractable = interactable;
+                    HUDManager.Instance.InteractionInfoUI.
+                                        SetNameText(_detectedInteractable.Name);
+                    // Memunculkan object UI InteractionInfo 
+                    HUDManager.Instance.CrosshairUI.SetHighlight(true);
+                    HUDManager.Instance.InteractionInfoUI.SetVisible(true);
                 }
+            }
+            else
+            {
+                HUDManager.Instance.CrosshairUI.SetHighlight(false);
+                HUDManager.Instance.InteractionInfoUI.SetVisible(false);               
             }
         }
     }
@@ -103,6 +113,7 @@ public class InteractDetector : MonoBehaviour
             _detectedInteractable = null;
             // Mengubah status menjadi sedang berinteraksi dengan object
             _isInteracting = true;
+            HUDManager.Instance.InteractionInfoUI.SetVisible(false);
         }
     }
  

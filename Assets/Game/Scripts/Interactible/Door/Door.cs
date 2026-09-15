@@ -34,6 +34,7 @@ public class Door : MonoBehaviour, IInteractable
     public UnityEvent OnDoorOpen;
     // Membuat event yang akan dipanggil ketika pintu tertutup
     public UnityEvent OnDoorClose;
+    public UnityEvent OnOpenLockedDoor;
     protected Coroutine _animatingDoorCoroutine;
     [ContextMenu("Interact Door")]
     public void test_interact()
@@ -64,6 +65,10 @@ public class Door : MonoBehaviour, IInteractable
                 _isLocked = false;
                 // Kemudian buka pintu
                 Open();
+            }
+            else
+            {
+                OnOpenLockedDoor?.Invoke();
             }
         }
         else

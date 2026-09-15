@@ -75,4 +75,13 @@ public class GhostAIController : MonoBehaviour
         // Menonaktifkan object di akhir frame
         gameObject.SetActive(false);
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerCharacter character = collision.gameObject.GetComponent<PlayerCharacter>();
+            character?.Death();
+        }
+    }
 }
